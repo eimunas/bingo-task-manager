@@ -2,14 +2,7 @@ import { INestApplication } from '@nestjs/common';
 import request from 'supertest';
 import { App } from 'supertest/types';
 import { UsersModule } from '@/users/users.module';
-import { createTestServer } from './utils';
-import { CreateUserDto } from '@/users/dtos/create-user.dto';
-
-const validUserPayload = (): CreateUserDto => ({
-  username: 'Test',
-  email: `new-user-${Date.now()}@example.com`,
-  password: 'Password_123!',
-});
+import { createTestServer, validUserPayload } from './utils';
 
 describe('UsersController (e2e)', () => {
   let app: INestApplication<App>;
@@ -30,8 +23,6 @@ describe('UsersController (e2e)', () => {
         .post('/users')
         .send(payload)
         .expect(201);
-
-      console.log(res.body);
 
       expect(res.body).toMatchObject({
         id: expect.any(String),

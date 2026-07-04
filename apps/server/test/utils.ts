@@ -1,3 +1,4 @@
+import { CreateUserDto } from '@/users/dtos/create-user.dto';
 import {
   INestApplication,
   ModuleMetadata,
@@ -38,3 +39,9 @@ export async function createTestServer(
 
   return app;
 }
+
+export const validUserPayload = (): CreateUserDto => ({
+  username: 'Test',
+  email: `new-user-${Date.now()}@example.com`,
+  password: 'Password_123!',
+});
